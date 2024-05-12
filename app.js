@@ -9,6 +9,7 @@ const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const postRouter = require('./routes/post');
 require('./connections');
+const { handleDevError, handleProdError } = require('./service/handler');
 
 const app = express();
 
@@ -37,8 +38,15 @@ app.use((req, res, next) => {
   res.status(404).send('Route Not Found');
 });
 app.use((err, req, res, next) => {
-  res.status(500).send({
-    error: err.message,
-  });
+  err.statusCode = err.statusCode || 500;
+  if (process.env.NODE_ENV === 'dev') {
+    return handleDevError(err, res);
+  }
+  if (err.name === 'ValidationError') {
+    err.message = 'Field Validation Failed';
+    err.isOperational = true;
+    return handleProdError(err, res);
+  }
+  handleProdError(err, res);
 });
 module.exports = app;
