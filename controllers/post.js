@@ -1,11 +1,13 @@
 const Post = require('../model/post');
-const { handleSuccess, handleError } = require('../service/handler');
+const { handleSuccess, createAppError } = require('../service/handler');
 
 const post = {
-  async createPost(req, res) {
+  async createPost(req, res, next) {
     try {
       const { content, ...field } = req.body;
-      if (!content) return handleError(res, 400, 'content is required');
+      if (!content) {
+        return next(createAppError(400, '"content" is required'));
+      }
       const createPost = {
         content: content.trim(),
         ...field,
@@ -13,21 +15,18 @@ const post = {
       await Post.create(createPost);
       handleSuccess(res, createPost);
     } catch (err) {
-      handleError(res, 400, err.message);
+      return next(err);
     }
   },
-  async deletePost(req, res) {
+  async deletePost(req, res, next) {
     const id = req.params.id;
-    if (!id) return handleError(res, 400, '"id" is required');
+    if (!id) return next(createAppError(400, '"id" is required'));
     try {
       const post = await Post.findByIdAndDelete(id);
-      if (!post) {
-        handleError(res, 400, '"id" not found');
-        return;
-      }
+      if (!post) return next(createAppError(400, '"id" not found'));
       handleSuccess(res, post);
     } catch (err) {
-      handleError(res, 400, err.message);
+      return next(err);
     }
   },
   async editPost(req, res) {
@@ -37,13 +36,10 @@ const post = {
         new: true,
         runValidators: true,
       });
-      if (!updatePost) {
-        handleError(res, 400, '"post" not found');
-        return;
-      }
+      if (!updatePost) return next(createAppError(400, '"post" not found'));
       handleSuccess(res, updatePost);
     } catch (err) {
-      handleError(res, 400, err.message);
+      return next(err);
     }
   },
 };

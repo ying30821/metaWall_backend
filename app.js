@@ -18,7 +18,7 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 process.on('unhandledRejection', (err, promise) => {
-  console.error('Uncaught rejection:', promise, 'reason:', 'err');
+  console.error('Uncaught rejection:', promise, 'reason:', err);
 });
 
 app.use(logger('dev'));
@@ -35,5 +35,10 @@ app.use('/api/post', postRouter);
 
 app.use((req, res, next) => {
   res.status(404).send('Route Not Found');
+});
+app.use((err, req, res, next) => {
+  res.status(500).send({
+    error: err.message,
+  });
 });
 module.exports = app;
