@@ -3,7 +3,7 @@ const { handleSuccess } = require('../service/handler');
 
 const posts = {
   async getPosts(req, res) {
-    const q = req.query.q;
+    const q = req.query.q || '';
     const timeSortData =
       req.query.timeSort === 'asc' ? 'createdAt' : '-createdAt';
     const posts = await Post.find({ content: { $regex: q, $options: 'i' } })
