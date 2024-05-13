@@ -9,7 +9,11 @@ const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const postRouter = require('./routes/post');
 require('./connections');
-const { handleDevError, handleProdError } = require('./service/handler');
+const {
+  createAppError,
+  handleDevError,
+  handleProdError,
+} = require('./service/handler');
 
 const app = express();
 
@@ -43,9 +47,14 @@ app.use((err, req, res, next) => {
     return handleDevError(err, res);
   }
   if (err.name === 'ValidationError') {
-    err.message = 'Field Validation Failed';
-    err.isOperational = true;
-    return handleProdError(err, res);
+    const newError = createAppError(400, 'Field Validation Failed.');
+    return handleProdError(newError, res);
+  } else if (err.name === 'CastError') {
+    const newError = createAppError(400, 'Unexpected value type encountered.');
+    return handleProdError(newError, res);
+  } else if (err.name === 'StrictModeError') {
+    const newError = createAppError(400, 'Field does not exist.');
+    return handleProdError(newError, res);
   }
   handleProdError(err, res);
 });

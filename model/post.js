@@ -26,6 +26,7 @@ const postScheme = new mongoose.Schema(
   },
   {
     versionKey: false,
+    strict: 'throw',
   }
 );
 
