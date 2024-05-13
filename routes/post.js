@@ -1,10 +1,10 @@
 const express = require('express');
 const PostControllers = require('../controllers/post');
-
+const { handleErrorAsync } = require('../service/handler');
 const router = express.Router();
 
-router.post('/', PostControllers.createPost);
-router.delete('/:id', PostControllers.deletePost);
-router.patch('/:id', PostControllers.editPost);
+router.post('/', handleErrorAsync(PostControllers.createPost));
+router.delete('/:id', handleErrorAsync(PostControllers.deletePost));
+router.patch('/:id', handleErrorAsync(PostControllers.editPost));
 
 module.exports = router;
