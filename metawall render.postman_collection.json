@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "c1a8bffa-8024-476b-a866-9e35fbcfd5cf",
+		"name": "metawall render",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18078340"
+	},
+	"item": [
+		{
+			"name": "Get Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://metawall-backend-j6d4.onrender.com/api/posts",
+					"protocol": "https",
+					"host": [
+						"metawall-backend-j6d4",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user\": \"663f77b111456536a3eb5515\",\n  \"image\": \"http://dummyimage.com/197x100.png/dddddd/000000\",\n  \"content\":\"at nibh in hac habitasse platea dictumst aliquam augue quam sollicitud…\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://metawall-backend-j6d4.onrender.com/api/post",
+					"protocol": "https",
+					"host": [
+						"metawall-backend-j6d4",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Posts",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://metawall-backend-j6d4.onrender.com/api/posts",
+					"protocol": "https",
+					"host": [
+						"metawall-backend-j6d4",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66239d412710f2394120a34e",
+					"protocol": "https",
+					"host": [
+						"metawall-backend-j6d4",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"post",
+						"66239d412710f2394120a34e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Post",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"content\": \"edit post\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66239d402710f2394120a34b",
+					"protocol": "https",
+					"host": [
+						"metawall-backend-j6d4",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"post",
+						"66239d402710f2394120a34b"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
