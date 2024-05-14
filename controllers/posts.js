@@ -1,4 +1,5 @@
 const Post = require('../model/post');
+const User = require('../model/user');
 const { handleSuccess } = require('../service/handler');
 
 const posts = {
