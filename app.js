@@ -43,13 +43,28 @@ app.use((err, req, res, next) => {
     return handleDevError(err, res);
   }
   if (err.name === 'ValidationError') {
-    const newError = createAppError(400, 'Field Validation Failed.');
+    const newError = createAppError(
+      400,
+      'Validation Failed: One or more fields contain invalid data.'
+    );
     return handleProdError(newError, res);
   } else if (err.name === 'CastError') {
-    const newError = createAppError(400, 'Unexpected value type encountered.');
+    const newError = createAppError(
+      400,
+      'Invalid data type: Unable to convert value to expected type.'
+    );
     return handleProdError(newError, res);
   } else if (err.name === 'StrictModeError') {
-    const newError = createAppError(400, 'Field does not exist.');
+    const newError = createAppError(
+      400,
+      'Invalid operation: Trying to modify undeclared variable.'
+    );
+    return handleProdError(newError, res);
+  } else if (err.name === 'SyntaxError') {
+    const newError = createAppError(
+      400,
+      'Syntax Error: Unable to parse request.'
+    );
     return handleProdError(newError, res);
   }
   handleProdError(err, res);
