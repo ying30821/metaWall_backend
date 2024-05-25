@@ -49,6 +49,31 @@ const users = {
       user: { name: newUser.name, token },
     });
   },
+  async signIn(req, res, next) {
+    const { email, password } = req.body;
+    if (!email || !password)
+      return next(
+        createAppError(
+          400,
+          'Validation Failed: One or more required fields are missing'
+        )
+      );
+    if (!validator.isEmail(email))
+      return next(
+        createAppError(400, 'Validation Failed: Invalid email format')
+      );
+    const user = await User.findOne({ email }).select('+password');
+    const auth = await bcrypt.compare(password, user.password);
+    if (!auth)
+      return next(createAppError(401, 'Unauthorized: Incorrect password'));
+    const token = generateToken(user._id);
+    handleSuccess(res, {
+      user: {
+        name: user.name,
+        token,
+      },
+    });
+  },
 };
 
 module.exports = users;
