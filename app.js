@@ -3,9 +3,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-
 const postsRouter = require('./routes/posts');
 const postRouter = require('./routes/post');
+const usersRouter = require('./routes/users');
 require('./connections');
 const {
   createAppError,
@@ -31,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
+app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/post', postRouter);
 
