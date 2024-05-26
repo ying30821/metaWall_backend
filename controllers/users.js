@@ -6,6 +6,12 @@ const { generateToken } = require('../service/auth');
 
 const users = {
   async signUp(req, res, next) {
+    const fields = [
+      { field: 'name', type: 'string' },
+      { field: 'email', type: 'string' },
+      { field: 'password', type: 'string' },
+      { field: 'confirm_password', type: 'string' },
+    ];
     const { name, email, password, confirm_password } = req.body;
     if (!name || !email || !password || !confirm_password)
       return next(
@@ -14,18 +20,11 @@ const users = {
           'Validation Failed: One or more required fields are missing'
         )
       );
-    if (typeof name !== 'string') {
-      return next(createAppError(400, '"name" must be a string'));
-    }
-    if (typeof email !== 'string') {
-      return next(createAppError(400, '"email" must be a string'));
-    }
-    if (typeof password !== 'string') {
-      return next(createAppError(400, '"password" must be a string'));
-    }
-    if (typeof confirm_password !== 'string') {
-      return next(createAppError(400, '"confirm_password" must be a string'));
-    }
+    fields.forEach(({ field, type }) => {
+      if (typeof req.body[field] !== type) {
+        return next(createAppError(400, `"${field}" must be a ${type}`));
+      }
+    });
     if (password !== confirm_password)
       return next(
         createAppError(
@@ -59,6 +58,10 @@ const users = {
     });
   },
   async signIn(req, res, next) {
+    const fields = [
+      { field: 'email', type: 'string' },
+      { field: 'password', type: 'string' },
+    ];
     const { email, password } = req.body;
     if (!email || !password)
       return next(
@@ -67,6 +70,11 @@ const users = {
           'Validation Failed: One or more required fields are missing'
         )
       );
+    fields.forEach(({ field, type }) => {
+      if (typeof req.body[field] !== type) {
+        return next(createAppError(400, `"${field}" must be a ${type}`));
+      }
+    });
     if (!validator.isEmail(email))
       return next(
         createAppError(400, 'Validation Failed: Invalid email format')
@@ -84,6 +92,10 @@ const users = {
     });
   },
   async updatePassword(req, res, next) {
+    const fields = [
+      { field: 'password', type: 'string' },
+      { field: 'confirm_password', type: 'string' },
+    ];
     const { password, confirm_password } = req.body;
     if (!password || !confirm_password)
       return next(
@@ -92,12 +104,11 @@ const users = {
           'Validation Failed: One or more required fields are missing'
         )
       );
-    if (typeof password !== 'string') {
-      return next(createAppError(400, '"password" must be a string'));
-    }
-    if (typeof confirm_password !== 'string') {
-      return next(createAppError(400, '"confirm_password" must be a string'));
-    }
+    fields.forEach(({ field, type }) => {
+      if (typeof req.body[field] !== type) {
+        return next(createAppError(400, `"${field}" must be a ${type}`));
+      }
+    });
     if (password !== confirm_password)
       return next(
         createAppError(
@@ -120,6 +131,9 @@ const users = {
     handleSuccessWithData(res, {
       user: { name: user.name, token },
     });
+  },
+  async getProfile(req, res, next) {
+    handleSuccessWithData(res, { user: req.user });
   },
 };
 
