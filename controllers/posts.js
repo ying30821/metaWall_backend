@@ -1,6 +1,9 @@
 const Post = require('../model/post');
 const User = require('../model/user');
-const { handleSuccess } = require('../service/handler');
+const {
+  handleSuccessWithData,
+  handleSuccessWithMsg,
+} = require('../service/handler');
 
 const posts = {
   async getPosts(req, res) {
@@ -13,12 +16,12 @@ const posts = {
         path: 'user',
         select: 'name photo',
       });
-    handleSuccess(res, posts);
+    handleSuccessWithData(res, posts);
   },
   async deletePosts(req, res) {
     await Post.deleteMany();
     const posts = await Post.find();
-    handleSuccess(res, posts);
+    handleSuccessWithMsg(res, 'Posts deleted successfully');
   },
 };
 

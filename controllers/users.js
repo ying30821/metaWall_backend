@@ -1,7 +1,7 @@
 const validator = require('validator');
 const User = require('../model/user');
 const bcrypt = require('bcryptjs');
-const { handleSuccess, createAppError } = require('../service/handler');
+const { handleSuccessWithData, createAppError } = require('../service/handler');
 const { generateToken } = require('../service/auth');
 
 const users = {
@@ -45,7 +45,7 @@ const users = {
       password: hashPassword,
     });
     const token = generateToken(newUser._id);
-    handleSuccess(res, {
+    handleSuccessWithData(res, {
       user: { name: newUser.name, token },
     });
   },
@@ -67,7 +67,7 @@ const users = {
     if (!auth)
       return next(createAppError(401, 'Unauthorized: Incorrect password'));
     const token = generateToken(user._id);
-    handleSuccess(res, {
+    handleSuccessWithData(res, {
       user: {
         name: user.name,
         token,

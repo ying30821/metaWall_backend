@@ -4,10 +4,16 @@ const createAppError = (httpStatus, errMsg, next) => {
   error.isOperational = true;
   return error;
 };
-const handleSuccess = (res, data) => {
+const handleSuccessWithData = (res, data) => {
   res.send({
     status: 'success',
     data,
+  });
+};
+const handleSuccessWithMsg = (res, message) => {
+  res.send({
+    status: 'success',
+    message,
   });
 };
 const handleDevError = (err, res) => {
@@ -42,7 +48,8 @@ const handleErrorAsync = (func) => {
 
 module.exports = {
   createAppError,
-  handleSuccess,
+  handleSuccessWithData,
+  handleSuccessWithMsg,
   handleDevError,
   handleProdError,
   handleErrorAsync,

@@ -1,5 +1,9 @@
 const Post = require('../model/post');
-const { handleSuccess, createAppError } = require('../service/handler');
+const {
+  handleSuccessWithData,
+  handleSuccessWithMsg,
+  createAppError,
+} = require('../service/handler');
 
 const post = {
   async createPost(req, res, next) {
@@ -22,14 +26,14 @@ const post = {
       image: image ? image.trim() : '',
     };
     await Post.create(createPost);
-    handleSuccess(res, createPost);
+    handleSuccessWithData(res, createPost);
   },
   async deletePost(req, res, next) {
     const id = req.params.id;
     if (!id) return next(createAppError(400, '"id" is required'));
     const post = await Post.findByIdAndDelete(id);
     if (!post) return next(createAppError(400, '"id" not found'));
-    handleSuccess(res, post);
+    handleSuccessWithMsg(res, 'Post deleted successfully');
   },
   async editPost(req, res, next) {
     const id = req.params.id;
@@ -38,7 +42,7 @@ const post = {
       runValidators: true,
     });
     if (!updatePost) return next(createAppError(400, '"post" not found'));
-    handleSuccess(res, updatePost);
+    handleSuccessWithData(res, updatePost);
   },
 };
 
