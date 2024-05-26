@@ -83,6 +83,44 @@ const users = {
       },
     });
   },
+  async updatePassword(req, res, next) {
+    const { password, confirm_password } = req.body;
+    if (!password || !confirm_password)
+      return next(
+        createAppError(
+          400,
+          'Validation Failed: One or more required fields are missing'
+        )
+      );
+    if (typeof password !== 'string') {
+      return next(createAppError(400, '"password" must be a string'));
+    }
+    if (typeof confirm_password !== 'string') {
+      return next(createAppError(400, '"confirm_password" must be a string'));
+    }
+    if (password !== confirm_password)
+      return next(
+        createAppError(
+          400,
+          'Validation Failed: Confirm password is not equal to password'
+        )
+      );
+    if (!validator.isLength(password, { min: 8 }))
+      return next(
+        createAppError(
+          400,
+          'Validation Failed: Password must be at least eight characters'
+        )
+      );
+    const hashPassword = await bcrypt.hash(password, 12);
+    const user = await User.findByIdAndUpdate(req.user.id, {
+      password: hashPassword,
+    });
+    const token = generateToken(user._id);
+    handleSuccessWithData(res, {
+      user: { name: user.name, token },
+    });
+  },
 };
 
 module.exports = users;
