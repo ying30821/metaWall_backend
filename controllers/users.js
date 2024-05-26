@@ -135,6 +135,25 @@ const users = {
   async getProfile(req, res, next) {
     handleSuccessWithData(res, { user: req.user });
   },
+  async editProfile(req, res, next) {
+    const { name, photo, sex } = req.body;
+    const fields = [
+      { field: 'name', type: 'string' },
+      { field: 'photo', type: 'string' },
+      { field: 'sex', type: 'string' },
+    ];
+    fields.forEach(({ field, type }) => {
+      if (req.body[field] && typeof req.body[field] !== type) {
+        return next(createAppError(400, `"${field}" must be a ${type}`));
+      }
+    });
+    const user = await User.findByIdAndUpdate(req.user.id, {
+      name,
+      photo,
+      sex,
+    });
+    handleSuccessWithData(res, { user });
+  },
 };
 
 module.exports = users;
