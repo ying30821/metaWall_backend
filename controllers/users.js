@@ -17,6 +17,15 @@ const users = {
     if (typeof name !== 'string') {
       return next(createAppError(400, '"name" must be a string'));
     }
+    if (typeof email !== 'string') {
+      return next(createAppError(400, '"email" must be a string'));
+    }
+    if (typeof password !== 'string') {
+      return next(createAppError(400, '"password" must be a string'));
+    }
+    if (typeof confirm_password !== 'string') {
+      return next(createAppError(400, '"confirm_password" must be a string'));
+    }
     if (password !== confirm_password)
       return next(
         createAppError(
