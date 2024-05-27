@@ -6,6 +6,7 @@ const cors = require('cors');
 const postsRouter = require('./routes/posts');
 const postRouter = require('./routes/post');
 const usersRouter = require('./routes/users');
+const uploadRouter = require('./routes/upload');
 require('./connections');
 const {
   createAppError,
@@ -34,6 +35,7 @@ app.use(cors());
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/post', postRouter);
+app.use('/api/upload', uploadRouter);
 
 app.use((req, res, next) => {
   res.status(404).send('Route Not Found');
