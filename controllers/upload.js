@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const firebaseAdmin = require('../connections/firebase');
 const bucket = firebaseAdmin.storage().bucket();
-const { createAppError } = require('../service/handler');
+const { handleSuccessWithData, createAppError } = require('../service/handler');
 
 const upload = {
   async uploadImage(req, res, next) {
@@ -18,12 +18,10 @@ const upload = {
         expires: '12-31-2500',
       };
       blob.getSignedUrl(config, (err, fileUrl) => {
-        res.send({
-          fileUrl,
-        });
+        handleSuccessWithData(res, fileUrl);
       });
       blobStream.on('error', (err) => {
-        res.status(500).send('Image upload failed');
+        return next(createAppError(500, 'Image upload failed'));
       });
     });
   },
