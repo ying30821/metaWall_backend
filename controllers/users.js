@@ -25,6 +25,13 @@ const users = {
         return next(createAppError(400, `"${field}" must be a ${type}`));
       }
     });
+    if (!validator.isLength(name, { min: 2 }))
+      return next(
+        createAppError(
+          400,
+          'Validation Failed: name must be at least two characters'
+        )
+      );
     if (password !== confirm_password)
       return next(
         createAppError(
@@ -32,11 +39,12 @@ const users = {
           'Validation Failed: Confirm password is not equal to password'
         )
       );
-    if (!validator.isLength(password, { min: 8 }))
+    const passwordRegex = /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    if (!passwordRegex.test(password))
       return next(
         createAppError(
           400,
-          'Validation Failed: Password must be at least eight characters'
+          'Validation Failed: Password must be at least eight characters and contain at least 1 number and 1 letter'
         )
       );
     if (!validator.isEmail(email))
@@ -80,6 +88,8 @@ const users = {
         createAppError(400, 'Validation Failed: Invalid email format')
       );
     const user = await User.findOne({ email }).select('+password');
+    if (!user)
+      return next(createAppError(401, 'Unauthorized: Incorrect password'));
     const auth = await bcrypt.compare(password, user.password);
     if (!auth)
       return next(createAppError(401, 'Unauthorized: Incorrect password'));
