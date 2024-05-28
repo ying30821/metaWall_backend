@@ -1,153 +1,437 @@
 {
 	"info": {
-		"_postman_id": "c1a8bffa-8024-476b-a866-9e35fbcfd5cf",
+		"_postman_id": "19f2e416-143c-4296-8b51-de6ecd703825",
 		"name": "metawall render",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18078340"
 	},
 	"item": [
 		{
-			"name": "Get Posts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://metawall-backend-j6d4.onrender.com/api/posts",
-					"protocol": "https",
-					"host": [
-						"metawall-backend-j6d4",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"api",
-						"posts"
-					]
+			"name": "會員功能",
+			"item": [
+				{
+					"name": "註冊會員",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jenny\",\n    \"email\": \"Jenny@g.co\",\n    \"password\": \"mypwd123\",\n    \"confirm_password\": \"mypwd123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/sign_up",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "登入會員",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"mei@test.com\",\n    \"password\": \"mypwd123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/sign_in",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "重設密碼",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"mypwd123\",\n    \"confirm_password\": \"mypwd123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/update_password",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"update_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人資料",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/profile",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新個人資料",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mei\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/profile",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Add Post",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"user\": \"663f77b111456536a3eb5515\",\n  \"image\": \"http://dummyimage.com/197x100.png/dddddd/000000\",\n  \"content\":\"at nibh in hac habitasse platea dictumst aliquam augue quam sollicitud…\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "其他",
+			"item": [
+				{
+					"name": "上傳圖片",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTIxZDIyZDk0NGZmMzJjYzY0MDU5ZiIsImlhdCI6MTcxNjcxMTkyOSwiZXhwIjoxNzE3MzE2NzI5fQ.E8iKTxe6F2D-gm85BYhXpyyMwSiCSi6tm6OIdMaNUyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/trapasecurity/Desktop/5bJiN0A.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/upload",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"upload"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "https://metawall-backend-j6d4.onrender.com/api/post",
-					"protocol": "https",
-					"host": [
-						"metawall-backend-j6d4",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"api",
-						"post"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Delete Posts",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "動態貼文",
+			"item": [
+				{
+					"name": "取得所有貼文",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTIxZDIyZDk0NGZmMzJjYzY0MDU5ZiIsImlhdCI6MTcxNjcxMTkyOSwiZXhwIjoxNzE3MzE2NzI5fQ.E8iKTxe6F2D-gm85BYhXpyyMwSiCSi6tm6OIdMaNUyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/posts",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "timeSort",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "test",
+									"disabled": true
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://metawall-backend-j6d4.onrender.com/api/posts",
-					"protocol": "https",
-					"host": [
-						"metawall-backend-j6d4",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"api",
-						"posts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Post",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "新增貼文",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTIxZDIyZDk0NGZmMzJjYzY0MDU5ZiIsImlhdCI6MTcxNjcxMTkyOSwiZXhwIjoxNzE3MzE2NzI5fQ.E8iKTxe6F2D-gm85BYhXpyyMwSiCSi6tm6OIdMaNUyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"663f77b111456536a3eb5515\",\n    \"content\": \"at nibh in hac habitasse platea dictumst aliquam augue quam sollicitud…\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66239d412710f2394120a34e",
-					"protocol": "https",
-					"host": [
-						"metawall-backend-j6d4",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"api",
-						"post",
-						"66239d412710f2394120a34e"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Edit Post",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n   \"content\": \"edit post\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "編輯貼文",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"edit post\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66239d402710f2394120a34b",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"66239d402710f2394120a34b"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66239d402710f2394120a34b",
-					"protocol": "https",
-					"host": [
-						"metawall-backend-j6d4",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"api",
-						"post",
-						"66239d402710f2394120a34b"
-					]
+				{
+					"name": "刪除貼文",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/663f7beb11456536a3eb5516",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"663f7beb11456536a3eb5516"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除所有貼文",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/posts",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
