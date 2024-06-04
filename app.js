@@ -8,11 +8,7 @@ const postRouter = require('./routes/post');
 const usersRouter = require('./routes/users');
 const uploadRouter = require('./routes/upload');
 require('./connections');
-const {
-  createAppError,
-  handleDevError,
-  handleProdError,
-} = require('./service/handler');
+const { handleGlobalError } = require('./service/handler');
 
 const app = express();
 
@@ -40,36 +36,5 @@ app.use('/api/upload', uploadRouter);
 app.use((req, res, next) => {
   res.status(404).send('Route Not Found');
 });
-app.use((err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  if (process.env.NODE_ENV === 'dev') {
-    return handleDevError(err, res);
-  }
-  if (err.name === 'ValidationError') {
-    const newError = createAppError(
-      400,
-      'Validation Failed: One or more fields contain invalid data.'
-    );
-    return handleProdError(newError, res);
-  } else if (err.name === 'CastError') {
-    const newError = createAppError(
-      400,
-      'Invalid data type: Unable to convert value to expected type.'
-    );
-    return handleProdError(newError, res);
-  } else if (err.name === 'StrictModeError') {
-    const newError = createAppError(
-      400,
-      'Invalid operation: Trying to modify undeclared variable.'
-    );
-    return handleProdError(newError, res);
-  } else if (err.name === 'SyntaxError') {
-    const newError = createAppError(
-      400,
-      'Syntax Error: Unable to parse request.'
-    );
-    return handleProdError(newError, res);
-  }
-  handleProdError(err, res);
-});
+app.use(handleGlobalError);
 module.exports = app;
