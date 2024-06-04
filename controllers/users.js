@@ -3,6 +3,7 @@ const User = require('../model/user');
 const bcrypt = require('bcryptjs');
 const { handleSuccessWithData, createAppError } = require('../service/handler');
 const { generateToken } = require('../service/auth');
+const { isValidPassword } = require('../utils/validations');
 
 const users = {
   async signUp(req, res, next) {
@@ -32,24 +33,23 @@ const users = {
           'Validation Failed: name must be at least two characters'
         )
       );
-    if (password !== confirm_password)
+    if (!validator.isEmail(email))
       return next(
-        createAppError(
-          400,
-          'Validation Failed: Confirm password is not equal to password'
-        )
+        createAppError(400, 'Validation Failed: Invalid email format')
       );
-    const passwordRegex = /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    if (!passwordRegex.test(password))
+    if (!isValidPassword(password))
       return next(
         createAppError(
           400,
           'Validation Failed: Password must be at least eight characters and contain at least 1 number and 1 letter'
         )
       );
-    if (!validator.isEmail(email))
+    if (password !== confirm_password)
       return next(
-        createAppError(400, 'Validation Failed: Invalid email format')
+        createAppError(
+          400,
+          'Validation Failed: Confirm password is not equal to password'
+        )
       );
     const isExistEmail = (await User.find({ email })).length > 0;
     if (isExistEmail)
@@ -87,6 +87,13 @@ const users = {
       return next(
         createAppError(400, 'Validation Failed: Invalid email format')
       );
+    if (!isValidPassword(password))
+      return next(
+        createAppError(
+          400,
+          'Validation Failed: Password must be at least eight characters and contain at least 1 number and 1 letter'
+        )
+      );
     const user = await User.findOne({ email }).select('+password');
     if (!user)
       return next(createAppError(401, 'Unauthorized: Incorrect password'));
@@ -119,18 +126,18 @@ const users = {
         return next(createAppError(400, `"${field}" must be a ${type}`));
       }
     });
+    if (!isValidPassword(password))
+      return next(
+        createAppError(
+          400,
+          'Validation Failed: Password must be at least eight characters and contain at least 1 number and 1 letter'
+        )
+      );
     if (password !== confirm_password)
       return next(
         createAppError(
           400,
           'Validation Failed: Confirm password is not equal to password'
-        )
-      );
-    if (!validator.isLength(password, { min: 8 }))
-      return next(
-        createAppError(
-          400,
-          'Validation Failed: Password must be at least eight characters'
         )
       );
     const hashPassword = await bcrypt.hash(password, 12);
