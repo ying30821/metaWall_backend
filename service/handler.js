@@ -43,6 +43,13 @@ const handleGlobalError = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'dev') {
     return handleDevError(err, res);
   }
+  if (err.name === 'MulterError' && err.code === 'LIMIT_FILE_SIZE') {
+    const newError = createAppError(
+      400,
+      'Validation Failed: The data size exceeds the allowable limit of 2MB.'
+    );
+    return handleProdError(newError, res);
+  }
   if (err.name === 'ValidationError') {
     const newError = createAppError(
       400,
