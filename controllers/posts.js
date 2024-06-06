@@ -1,5 +1,6 @@
 const Post = require('../model/post');
 const User = require('../model/user');
+const Comment = require('../model/comment');
 const {
   handleSuccessWithData,
   handleSuccessWithMsg,
@@ -15,6 +16,10 @@ const posts = {
       .populate({
         path: 'user',
         select: 'name photo',
+      })
+      .populate({
+        path: 'comments',
+        select: 'comment user',
       });
     handleSuccessWithData(res, posts);
   },
