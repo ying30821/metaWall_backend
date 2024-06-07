@@ -8,5 +8,10 @@ const router = express.Router();
 router.post('/', checkAuth, handleErrorAsync(PostControllers.createPost));
 router.delete('/:id', checkAuth, handleErrorAsync(PostControllers.deletePost));
 router.patch('/:id', checkAuth, handleErrorAsync(PostControllers.editPost));
+router.post(
+  '/:id/comment',
+  checkAuth,
+  handleErrorAsync(PostControllers.createPostComment)
+);
 
 module.exports = router;

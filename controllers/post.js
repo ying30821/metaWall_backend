@@ -1,4 +1,5 @@
 const Post = require('../model/post');
+const Comment = require('../model/comment');
 const {
   handleSuccessWithData,
   handleSuccessWithMsg,
@@ -43,6 +44,23 @@ const post = {
     });
     if (!updatePost) return next(createAppError(400, '"post" not found'));
     handleSuccessWithData(res, updatePost);
+  },
+  async createPostComment(req, res, next) {
+    const user_id = req.user.id;
+    const post_id = req.params.id;
+    const { comment } = req.body;
+    if (typeof comment !== 'string') {
+      return next(createAppError(400, '"comment" must be a string'));
+    }
+    if (!comment.trim()) {
+      return next(createAppError(400, '"comment" is required'));
+    }
+    const newComment = await Comment.create({
+      post: post_id,
+      user: user_id,
+      comment: comment.trim(),
+    });
+    handleSuccessWithData(res, newComment);
   },
 };
 
