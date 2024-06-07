@@ -62,6 +62,20 @@ const post = {
     });
     handleSuccessWithData(res, newComment);
   },
+  async likePost(req, res, next) {
+    const user_id = req.user.id;
+    const post_id = req.params.id;
+    await Post.updateOne(
+      {
+        _id: post_id,
+        'likes.user': { $ne: user_id },
+      },
+      {
+        $addToSet: { likes: { user: user_id } },
+      }
+    );
+    handleSuccessWithMsg(res, 'Post liked successfully');
+  },
 };
 
 module.exports = post;
