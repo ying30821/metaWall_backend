@@ -14,5 +14,10 @@ router.post(
   handleErrorAsync(PostControllers.createPostComment)
 );
 router.post('/:id/like', checkAuth, handleErrorAsync(PostControllers.likePost));
+router.delete(
+  '/:id/unlike',
+  checkAuth,
+  handleErrorAsync(PostControllers.unlikePost)
+);
 
 module.exports = router;

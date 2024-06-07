@@ -76,6 +76,19 @@ const post = {
     );
     handleSuccessWithMsg(res, 'Post liked successfully');
   },
+  async unlikePost(req, res, next) {
+    const user_id = req.user.id;
+    const post_id = req.params.id;
+    await Post.updateOne(
+      {
+        _id: post_id,
+      },
+      {
+        $pull: { likes: { user: user_id } },
+      }
+    );
+    handleSuccessWithMsg(res, 'Post unliked successfully');
+  },
 };
 
 module.exports = post;
