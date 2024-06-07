@@ -31,5 +31,10 @@ router.delete(
   checkAuth,
   handleErrorAsync(UsersControllers.unfollowUser)
 );
+router.get(
+  '/followings',
+  checkAuth,
+  handleErrorAsync(UsersControllers.getFollowings)
+);
 
 module.exports = router;

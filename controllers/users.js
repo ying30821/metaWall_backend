@@ -227,6 +227,14 @@ const users = {
     );
     handleSuccessWithMsg(res, 'Unfollow user successfully');
   },
+  async getFollowings(req, res, next) {
+    const user_id = req.user.id;
+    const { followings } = await User.findOne({ _id: user_id }).populate({
+      path: 'followings.user',
+      select: 'name photo',
+    });
+    handleSuccessWithData(res, followings);
+  },
 };
 
 module.exports = users;
