@@ -27,6 +27,24 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ['male', 'female'],
     },
+    followers: [
+      {
+        user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    followings: [
+      {
+        user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
     createdAt: {
       type: Date,
       default: Date.now,
