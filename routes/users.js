@@ -21,5 +21,10 @@ router.patch(
   checkAuth,
   handleErrorAsync(UsersControllers.editProfile)
 );
+router.post(
+  '/:id/follow',
+  checkAuth,
+  handleErrorAsync(UsersControllers.followUser)
+);
 
 module.exports = router;

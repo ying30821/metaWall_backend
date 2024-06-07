@@ -1,7 +1,11 @@
 const validator = require('validator');
 const User = require('../model/user');
 const bcrypt = require('bcryptjs');
-const { handleSuccessWithData, createAppError } = require('../service/handler');
+const {
+  handleSuccessWithData,
+  handleSuccessWithMsg,
+  createAppError,
+} = require('../service/handler');
 const { generateToken } = require('../service/auth');
 const { isValidPassword } = require('../utils/validations');
 
@@ -170,6 +174,33 @@ const users = {
       sex,
     });
     handleSuccessWithData(res, { user });
+  },
+  async followUser(req, res, next) {
+    const user_id = req.user.id;
+    const following_user_id = req.params.id;
+    if (user_id === following_user_id)
+      return next(createAppError(400, "You can't follow yourself"));
+    const user = await User.findOne({ _id: following_user_id });
+    if (!user) return next(createAppError(400, "User doesn't exit"));
+    await User.updateOne(
+      {
+        _id: user_id,
+        'following.user': { $ne: following_user_id },
+      },
+      {
+        $addToSet: { followings: { user: following_user_id } },
+      }
+    );
+    await User.updateOne(
+      {
+        _id: following_user_id,
+        'followers.user': { $ne: user_id },
+      },
+      {
+        $addToSet: { followers: { user: user_id } },
+      }
+    );
+    handleSuccessWithMsg(res, 'Follow user successfully');
   },
 };
 
