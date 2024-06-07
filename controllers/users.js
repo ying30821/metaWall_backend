@@ -202,6 +202,31 @@ const users = {
     );
     handleSuccessWithMsg(res, 'Follow user successfully');
   },
+  async unfollowUser(req, res, next) {
+    const user_id = req.user.id;
+    const following_user_id = req.params.id;
+    if (user_id === following_user_id)
+      return next(createAppError(400, "You can't unfollow yourself"));
+    const user = await User.findOne({ _id: following_user_id });
+    if (!user) return next(createAppError(400, "User doesn't exit"));
+    await User.updateOne(
+      {
+        _id: user_id,
+      },
+      {
+        $pull: { followings: { user: following_user_id } },
+      }
+    );
+    await User.updateOne(
+      {
+        _id: following_user_id,
+      },
+      {
+        $pull: { followers: { user: user_id } },
+      }
+    );
+    handleSuccessWithMsg(res, 'Unfollow user successfully');
+  },
 };
 
 module.exports = users;

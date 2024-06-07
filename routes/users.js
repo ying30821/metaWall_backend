@@ -26,5 +26,10 @@ router.post(
   checkAuth,
   handleErrorAsync(UsersControllers.followUser)
 );
+router.delete(
+  '/:id/unfollow',
+  checkAuth,
+  handleErrorAsync(UsersControllers.unfollowUser)
+);
 
 module.exports = router;
