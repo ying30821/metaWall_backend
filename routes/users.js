@@ -36,5 +36,10 @@ router.get(
   checkAuth,
   handleErrorAsync(UsersControllers.getFollowings)
 );
+router.get(
+  '/getLikeList',
+  checkAuth,
+  handleErrorAsync(UsersControllers.getLikeList)
+);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const validator = require('validator');
 const User = require('../model/user');
+const Post = require('../model/post');
 const bcrypt = require('bcryptjs');
 const {
   handleSuccessWithData,
@@ -234,6 +235,14 @@ const users = {
       select: 'name photo',
     });
     handleSuccessWithData(res, followings);
+  },
+  async getLikeList(req, res, next) {
+    const user_id = req.user.id;
+    const data = await Post.find({ 'likes.user': user_id }).populate({
+      path: 'user',
+      select: 'name photo',
+    });
+    handleSuccessWithData(res, data);
   },
 };
 
