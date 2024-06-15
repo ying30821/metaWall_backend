@@ -23,6 +23,26 @@ const posts = {
       });
     handleSuccessWithData(res, posts);
   },
+  async getUserPosts(req, res) {
+    const user_id = req.params.id;
+    const q = req.query.q || '';
+    const timeSortData =
+      req.query.timeSort === 'asc' ? 'createdAt' : '-createdAt';
+    const posts = await Post.find({
+      user: user_id,
+      content: { $regex: q, $options: 'i' },
+    })
+      .sort(timeSortData)
+      .populate({
+        path: 'user',
+        select: 'name photo',
+      })
+      .populate({
+        path: 'comments',
+        select: 'comment user',
+      });
+    handleSuccessWithData(res, posts);
+  },
   async deletePosts(req, res) {
     await Post.deleteMany();
     const posts = await Post.find();
