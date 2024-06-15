@@ -5,6 +5,7 @@ const { checkAuth } = require('../service/auth');
 
 const router = express.Router();
 
+router.get('/:id', checkAuth, handleErrorAsync(PostControllers.getPost));
 router.post('/', checkAuth, handleErrorAsync(PostControllers.createPost));
 router.delete('/:id', checkAuth, handleErrorAsync(PostControllers.deletePost));
 router.patch('/:id', checkAuth, handleErrorAsync(PostControllers.editPost));

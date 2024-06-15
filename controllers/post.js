@@ -7,6 +7,12 @@ const {
 } = require('../service/handler');
 
 const post = {
+  async getPost(req, res, next) {
+    const post_id = req.params.id;
+    const post = await Post.findOne({ _id: post_id });
+    if (!post) return next(createAppError(400, 'post not found'));
+    handleSuccessWithData(res, post);
+  },
   async createPost(req, res, next) {
     const { content, user, image } = req.body;
     if (typeof content !== 'string') {
