@@ -5,12 +5,23 @@ const {
   handleSuccessWithMsg,
   createAppError,
 } = require('../service/handler');
+const { isValidObjectId } = require('../utils/validations');
 
 const post = {
   async getPost(req, res, next) {
     const post_id = req.params.id;
-    const post = await Post.findOne({ _id: post_id });
-    if (!post) return next(createAppError(400, 'post not found'));
+    if (!isValidObjectId(post_id))
+      return next(createAppError(400, 'Post not found'));
+    const post = await Post.findOne({ _id: post_id })
+      .populate({
+        path: 'user',
+        select: 'name photo',
+      })
+      .populate({
+        path: 'comments',
+        select: 'comment user createdAt',
+      });
+    if (!post) return next(createAppError(400, 'Post not found'));
     handleSuccessWithData(res, post);
   },
   async createPost(req, res, next) {
