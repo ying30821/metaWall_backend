@@ -25,7 +25,7 @@ const checkAuth = handleErrorAsync(async (req, res, next) => {
       }
     });
   });
-  const user = await User.findById(decoded.id);
+  const user = await User.findById(decoded.id).select('-followers -followings');
   req.user = user;
   next();
 });
