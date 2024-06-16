@@ -2,7 +2,7 @@ const multer = require('multer');
 const path = require('path');
 const validateUploadImg = multer({
   limits: {
-    fileSize: 1024,
+    fileSize: 2 * 1024 * 1024,
   },
   fileFilter(req, file, cb) {
     const ext = path.extname(file.originalname).toLowerCase();
