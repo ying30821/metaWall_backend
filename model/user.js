@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { transformId } = require('../utils/transformId');
 
 const userSchema = new mongoose.Schema(
   {
@@ -23,9 +24,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    sex: {
+    gender: {
       type: String,
-      enum: ['male', 'female'],
+      enum: {
+        values: ['male', 'female'],
+        message: '{VALUE} is not supported',
+      },
     },
     followers: [
       {
@@ -53,10 +57,11 @@ const userSchema = new mongoose.Schema(
   },
   {
     versionKey: false,
+    toJSON: { transform: transformId },
+    toObject: { transform: transformId },
     strict: 'throw',
   }
 );
-
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

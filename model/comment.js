@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { transformId } = require('../utils/transformId');
 
 const commentSchema = new mongoose.Schema(
   {
@@ -23,6 +24,8 @@ const commentSchema = new mongoose.Schema(
   },
   {
     versionKey: false,
+    toJSON: { transform: transformId },
+    toObject: { transform: transformId },
     strict: 'throw',
   }
 );
@@ -30,7 +33,7 @@ const commentSchema = new mongoose.Schema(
 commentSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
-    select: 'id name photo createdAt',
+    select: 'id name photo',
   });
   next();
 });
