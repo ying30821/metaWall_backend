@@ -43,6 +43,10 @@ const posts = {
       .select('-user')
       .sort(timeSortData)
       .populate({
+        path: 'user',
+        select: 'name photo',
+      })
+      .populate({
         path: 'comments',
         select: 'comment user -post',
       });
