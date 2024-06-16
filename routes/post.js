@@ -14,6 +14,11 @@ router.post(
   checkAuth,
   handleErrorAsync(PostControllers.createPostComment)
 );
+router.patch(
+  '/comment/:id',
+  checkAuth,
+  handleErrorAsync(PostControllers.editPostComment)
+);
 router.delete(
   '/comment/:id',
   checkAuth,

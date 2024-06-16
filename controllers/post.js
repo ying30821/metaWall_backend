@@ -83,6 +83,32 @@ const post = {
     });
     handleSuccessWithData(res, newComment);
   },
+  async editPostComment(req, res, next) {
+    const user_id = req.user.id;
+    const comment_id = req.params.id;
+    const { comment } = req.body;
+    if (typeof comment !== 'string') {
+      return next(createAppError(400, '"comment" must be a string'));
+    }
+    if (!comment.trim()) {
+      return next(createAppError(400, '"comment" is required'));
+    }
+    if (!isValidObjectId(comment_id))
+      return next(createAppError(404, 'Comment not found'));
+    const commentData = await Comment.findById(comment_id);
+    if (!commentData) return next(createAppError(404, 'Comment not found'));
+    if (commentData.user.id !== user_id)
+      return next(createAppError(403, 'Unauthorized to delete this comment'));
+    const updateComment = await Comment.findByIdAndUpdate(
+      comment_id,
+      { comment },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    handleSuccessWithData(res, updateComment);
+  },
   async deletePostComment(req, res, next) {
     const user_id = req.user.id;
     const comment_id = req.params.id;
@@ -95,7 +121,6 @@ const post = {
     await Comment.findByIdAndDelete(comment_id);
     handleSuccessWithMsg(res, 'Comment deleted successfully');
   },
-
   async addPostLike(req, res) {
     const user_id = req.user.id;
     const post_id = req.params.id;
