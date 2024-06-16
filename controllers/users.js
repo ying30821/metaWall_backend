@@ -8,7 +8,7 @@ const {
   createAppError,
 } = require('../service/handler');
 const { generateToken } = require('../service/auth');
-const { isValidPassword } = require('../utils/validations');
+const { isValidPassword, isValidObjectId } = require('../utils/validations');
 
 const users = {
   async signUp(req, res, next) {
@@ -190,10 +190,12 @@ const users = {
   async followUser(req, res, next) {
     const user_id = req.user.id;
     const following_user_id = req.params.id;
+    if (!isValidObjectId(following_user_id))
+      return next(createAppError(404, 'User not found'));
     if (user_id === following_user_id)
       return next(createAppError(400, "You can't follow yourself"));
     const user = await User.findOne({ _id: following_user_id });
-    if (!user) return next(createAppError(400, "User doesn't exit"));
+    if (!user) return next(createAppError(404, 'User not found'));
     await User.updateOne(
       {
         _id: user_id,
@@ -217,10 +219,12 @@ const users = {
   async unfollowUser(req, res, next) {
     const user_id = req.user.id;
     const following_user_id = req.params.id;
+    if (!isValidObjectId(following_user_id))
+      return next(createAppError(404, 'User not found'));
     if (user_id === following_user_id)
       return next(createAppError(400, "You can't unfollow yourself"));
     const user = await User.findOne({ _id: following_user_id });
-    if (!user) return next(createAppError(400, "User doesn't exit"));
+    if (!user) return next(createAppError(404, 'User not found'));
     await User.updateOne(
       {
         _id: user_id,
@@ -239,7 +243,7 @@ const users = {
     );
     handleSuccessWithMsg(res, 'Unfollow user successfully');
   },
-  async getFollowings(req, res, next) {
+  async getFollowings(req, res) {
     const user_id = req.user.id;
     const { followings } = await User.findOne({ _id: user_id }).populate({
       path: 'followings.user',

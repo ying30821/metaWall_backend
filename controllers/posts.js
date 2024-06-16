@@ -23,7 +23,7 @@ const posts = {
       })
       .populate({
         path: 'comments',
-        select: 'comment user createdAt',
+        select: 'comment user createdAt -post',
       });
     handleSuccessWithData(res, posts);
   },
@@ -33,9 +33,9 @@ const posts = {
     const timeSortData =
       req.query.timeSort === 'asc' ? 'createdAt' : '-createdAt';
     if (!isValidObjectId(user_id))
-      return next(createAppError(400, 'User not found'));
+      return next(createAppError(404, 'User not found'));
     const user = await User.findOne({ _id: user_id }).select('-followings');
-    if (!user) return next(createAppError(400, 'User not found'));
+    if (!user) return next(createAppError(404, 'User not found'));
     const posts = await Post.find({
       user: user_id,
       content: { $regex: q, $options: 'i' },
@@ -44,7 +44,7 @@ const posts = {
       .sort(timeSortData)
       .populate({
         path: 'comments',
-        select: 'comment user',
+        select: 'comment user -post',
       });
     handleSuccessWithData(res, {
       user,

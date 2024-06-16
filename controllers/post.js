@@ -11,7 +11,7 @@ const post = {
   async getPost(req, res, next) {
     const post_id = req.params.id;
     if (!isValidObjectId(post_id))
-      return next(createAppError(400, 'Post not found'));
+      return next(createAppError(404, 'Post not found'));
     const post = await Post.findOne({ _id: post_id })
       .populate({
         path: 'user',
@@ -21,7 +21,7 @@ const post = {
         path: 'comments',
         select: 'comment user createdAt',
       });
-    if (!post) return next(createAppError(400, 'Post not found'));
+    if (!post) return next(createAppError(404, 'Post not found'));
     handleSuccessWithData(res, post);
   },
   async createPost(req, res, next) {
@@ -50,7 +50,7 @@ const post = {
     const id = req.params.id;
     if (!id) return next(createAppError(400, '"id" is required'));
     const post = await Post.findByIdAndDelete(id);
-    if (!post) return next(createAppError(400, '"id" not found'));
+    if (!post) return next(createAppError(404, 'Post not found'));
     handleSuccessWithMsg(res, 'Post deleted successfully');
   },
   async editPost(req, res, next) {
@@ -59,7 +59,7 @@ const post = {
       new: true,
       runValidators: true,
     });
-    if (!updatePost) return next(createAppError(400, '"post" not found'));
+    if (!updatePost) return next(createAppError(404, 'Post not found'));
     handleSuccessWithData(res, updatePost);
   },
   async createPostComment(req, res, next) {
@@ -79,7 +79,7 @@ const post = {
     });
     handleSuccessWithData(res, newComment);
   },
-  async addPostLike(req, res, next) {
+  async addPostLike(req, res) {
     const user_id = req.user.id;
     const post_id = req.params.id;
     await Post.updateOne(
@@ -93,7 +93,7 @@ const post = {
     );
     handleSuccessWithMsg(res, 'Like added successfully');
   },
-  async deletePostLike(req, res, next) {
+  async deletePostLike(req, res) {
     const user_id = req.user.id;
     const post_id = req.params.id;
     await Post.updateOne(
