@@ -27,7 +27,7 @@ router.post(
   handleErrorAsync(UsersControllers.followUser)
 );
 router.delete(
-  '/:id/unfollow',
+  '/:id/follow',
   checkAuth,
   handleErrorAsync(UsersControllers.unfollowUser)
 );
@@ -37,9 +37,9 @@ router.get(
   handleErrorAsync(UsersControllers.getFollowings)
 );
 router.get(
-  '/getLikeList',
+  '/liked_posts',
   checkAuth,
-  handleErrorAsync(UsersControllers.getLikeList)
+  handleErrorAsync(UsersControllers.getLikedPosts)
 );
 
 module.exports = router;

@@ -56,7 +56,7 @@ const users = {
           'Validation Failed: Confirm password is not equal to password'
         )
       );
-    const isExistEmail = (await User.find({ email })).length > 0;
+    const isExistEmail = await User.exists({ email });
     if (isExistEmail)
       return next(createAppError(409, 'Conflict: The account already exists'));
     const hashPassword = await bcrypt.hash(password, 12);
@@ -146,9 +146,16 @@ const users = {
         )
       );
     const hashPassword = await bcrypt.hash(password, 12);
-    const user = await User.findByIdAndUpdate(req.user.id, {
-      password: hashPassword,
-    });
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        password: hashPassword,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     const token = generateToken(user._id);
     handleSuccessWithData(res, {
       user: { name: user.name, token },
@@ -158,22 +165,26 @@ const users = {
     handleSuccessWithData(res, { user: req.user });
   },
   async editProfile(req, res, next) {
-    const { name, photo, sex } = req.body;
+    const { name, photo, gender } = req.body;
     const fields = [
       { field: 'name', type: 'string' },
       { field: 'photo', type: 'string' },
-      { field: 'sex', type: 'string' },
+      { field: 'gender', type: 'string' },
     ];
     fields.forEach(({ field, type }) => {
       if (req.body[field] && typeof req.body[field] !== type) {
         return next(createAppError(400, `"${field}" must be a ${type}`));
       }
     });
-    const user = await User.findByIdAndUpdate(req.user.id, {
-      name,
-      photo,
-      sex,
-    });
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        name,
+        photo,
+        gender,
+      },
+      { new: true, runValidators: true }
+    ).select('-followers -followings');
     handleSuccessWithData(res, { user });
   },
   async followUser(req, res, next) {
@@ -236,12 +247,14 @@ const users = {
     });
     handleSuccessWithData(res, followings);
   },
-  async getLikeList(req, res, next) {
+  async getLikedPosts(req, res, next) {
     const user_id = req.user.id;
-    const data = await Post.find({ 'likes.user': user_id }).populate({
-      path: 'user',
-      select: 'name photo',
-    });
+    const data = await Post.find({ 'likes.user': user_id })
+      .populate({
+        path: 'user',
+        select: 'name photo',
+      })
+      .select('-content -image');
     handleSuccessWithData(res, data);
   },
 };
