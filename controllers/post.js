@@ -68,7 +68,7 @@ const post = {
     });
     handleSuccessWithData(res, newComment);
   },
-  async likePost(req, res, next) {
+  async addPostLike(req, res, next) {
     const user_id = req.user.id;
     const post_id = req.params.id;
     await Post.updateOne(
@@ -80,9 +80,9 @@ const post = {
         $addToSet: { likes: { user: user_id } },
       }
     );
-    handleSuccessWithMsg(res, 'Post liked successfully');
+    handleSuccessWithMsg(res, 'Like added successfully');
   },
-  async unlikePost(req, res, next) {
+  async deletePostLike(req, res, next) {
     const user_id = req.user.id;
     const post_id = req.params.id;
     await Post.updateOne(
@@ -93,7 +93,7 @@ const post = {
         $pull: { likes: { user: user_id } },
       }
     );
-    handleSuccessWithMsg(res, 'Post unliked successfully');
+    handleSuccessWithMsg(res, 'Like removed successfully');
   },
 };
 
