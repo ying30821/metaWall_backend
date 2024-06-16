@@ -65,6 +65,10 @@ const post = {
   async createPostComment(req, res, next) {
     const user_id = req.user.id;
     const post_id = req.params.id;
+    if (!isValidObjectId(post_id))
+      return next(createAppError(404, 'Post not found'));
+    const isExit = await Post.exists({ _id: post_id });
+    if (!isExit) return next(createAppError(404, 'Post not found'));
     const { comment } = req.body;
     if (typeof comment !== 'string') {
       return next(createAppError(400, '"comment" must be a string'));
@@ -79,6 +83,19 @@ const post = {
     });
     handleSuccessWithData(res, newComment);
   },
+  async deletePostComment(req, res, next) {
+    const user_id = req.user.id;
+    const comment_id = req.params.id;
+    if (!isValidObjectId(comment_id))
+      return next(createAppError(404, 'Comment not found'));
+    const comment = await Comment.findById(comment_id);
+    if (!comment) return next(createAppError(404, 'Comment not found'));
+    if (comment.user.id !== user_id)
+      return next(createAppError(403, 'Unauthorized to delete this comment'));
+    await Comment.findByIdAndDelete(comment_id);
+    handleSuccessWithMsg(res, 'Comment deleted successfully');
+  },
+
   async addPostLike(req, res) {
     const user_id = req.user.id;
     const post_id = req.params.id;

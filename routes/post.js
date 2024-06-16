@@ -14,6 +14,11 @@ router.post(
   checkAuth,
   handleErrorAsync(PostControllers.createPostComment)
 );
+router.delete(
+  '/comment/:id',
+  checkAuth,
+  handleErrorAsync(PostControllers.deletePostComment)
+);
 router.post(
   '/:id/like',
   checkAuth,
