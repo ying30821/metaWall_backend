@@ -122,7 +122,6 @@ const post = {
     if (!isValidObjectId(comment_id))
       return next(createAppError(404, 'Comment not found'));
     const commentData = await Comment.findById(comment_id);
-    console.log('commentData: ', commentData.user.id, user_id);
     if (!commentData) return next(createAppError(404, 'Comment not found'));
     if (commentData.user.id !== user_id)
       return next(createAppError(403, 'Unauthorized to edit this comment'));
