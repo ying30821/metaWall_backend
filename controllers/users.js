@@ -8,7 +8,7 @@ const {
   createAppError,
 } = require('../service/handler');
 const { generateToken } = require('../service/auth');
-const { isValidPassword, isValidObjectId } = require('../utils/validations');
+const { isValidPassword, isValidObjectId } = require('../validations');
 
 const users = {
   async signUp(req, res, next) {

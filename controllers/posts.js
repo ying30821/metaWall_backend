@@ -6,7 +6,7 @@ const {
   handleSuccessWithMsg,
   createAppError,
 } = require('../service/handler');
-const { isValidObjectId } = require('../utils/validations');
+const { isValidObjectId } = require('../validations');
 
 const posts = {
   async getPosts(req, res) {
