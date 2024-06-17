@@ -46,21 +46,47 @@ const post = {
     await Post.create(createPost);
     handleSuccessWithData(res, createPost);
   },
-  async deletePost(req, res, next) {
-    const id = req.params.id;
-    if (!id) return next(createAppError(400, '"id" is required'));
-    const post = await Post.findByIdAndDelete(id);
-    if (!post) return next(createAppError(404, 'Post not found'));
-    handleSuccessWithMsg(res, 'Post deleted successfully');
-  },
   async editPost(req, res, next) {
-    const id = req.params.id;
-    const updatePost = await Post.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
+    const user_id = req.user.id;
+    const post_id = req.params.id;
+    const { content } = req.body;
+    if (!isValidObjectId(post_id))
+      return next(createAppError(404, 'Post not found'));
+    if (typeof content !== 'string') {
+      return next(createAppError(400, '"content" must be a string'));
+    }
+    const postData = await Post.findById(post_id).populate({
+      path: 'user',
+      select: 'id',
     });
+    if (!postData) return next(createAppError(404, 'Post not found'));
+    if (postData.user.id !== user_id)
+      return next(createAppError(403, 'Unauthorized to edit this post'));
+    const updatePost = await Post.findByIdAndUpdate(
+      post_id,
+      { content },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     if (!updatePost) return next(createAppError(404, 'Post not found'));
     handleSuccessWithData(res, updatePost);
+  },
+  async deletePost(req, res, next) {
+    const user_id = req.user.id;
+    const post_id = req.params.id;
+    if (!isValidObjectId(post_id))
+      return next(createAppError(404, 'Post not found'));
+    const postData = await Post.findById(post_id).populate({
+      path: 'user',
+      select: 'id',
+    });
+    if (!postData) return next(createAppError(404, 'Post not found'));
+    if (postData.user.id !== user_id)
+      return next(createAppError(403, 'Unauthorized to delete this post'));
+    await Post.findByIdAndDelete(post_id);
+    handleSuccessWithMsg(res, 'Post deleted successfully');
   },
   async createPostComment(req, res, next) {
     const user_id = req.user.id;
@@ -96,9 +122,10 @@ const post = {
     if (!isValidObjectId(comment_id))
       return next(createAppError(404, 'Comment not found'));
     const commentData = await Comment.findById(comment_id);
+    console.log('commentData: ', commentData.user.id, user_id);
     if (!commentData) return next(createAppError(404, 'Comment not found'));
     if (commentData.user.id !== user_id)
-      return next(createAppError(403, 'Unauthorized to delete this comment'));
+      return next(createAppError(403, 'Unauthorized to edit this comment'));
     const updateComment = await Comment.findByIdAndUpdate(
       comment_id,
       { comment },
