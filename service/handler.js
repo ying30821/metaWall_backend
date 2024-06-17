@@ -84,6 +84,16 @@ const handleErrorAsync = (func) => {
     });
   };
 };
+const handleUnexpectedError = () => {
+  process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception！');
+    console.error(err);
+    process.exit(1);
+  });
+  process.on('unhandledRejection', (err, promise) => {
+    console.error('Uncaught rejection:', promise, 'reason:', err);
+  });
+};
 
 module.exports = {
   createAppError,
@@ -91,4 +101,5 @@ module.exports = {
   handleSuccessWithMsg,
   handleGlobalError,
   handleErrorAsync,
+  handleUnexpectedError,
 };
