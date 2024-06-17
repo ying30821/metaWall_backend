@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "19f2e416-143c-4296-8b51-de6ecd703825",
+		"_postman_id": "b2fa77f1-5ed3-4275-b501-c868226ec9c5",
 		"name": "metawall render",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18078340"
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Jenny\",\n    \"email\": \"Jenny@g.co\",\n    \"password\": \"mypwd123\",\n    \"confirm_password\": \"mypwd123\"\n}",
+							"raw": "{\n    \"name\": \"eric\",\n    \"email\": \"eric@test.com\",\n    \"password\": \"mypwd123\",\n    \"confirm_password\": \"mypwd123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -47,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"mei@test.com\",\n    \"password\": \"mypwd123\"\n}",
+							"raw": "{\n    \"email\": \"eric@test.com\",\n    \"password\": \"mypwd123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -79,7 +79,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
 									"type": "string"
 								}
 							]
@@ -120,7 +120,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
 									"type": "string"
 								}
 							]
@@ -152,7 +152,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjJiYjg1YTFiZGU3ZDY3Y2VhOTRjNiIsImlhdCI6MTcxODQ1Nzg3MiwiZXhwIjoxNzE5MDYyNjcyfQ.OuXK_jf3PH1DLvZu1bnekHJQPMw49t6kaDCC6QOizuE",
 									"type": "string"
 								}
 							]
@@ -161,7 +161,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Mei\"\n}",
+							"raw": "{\n    \"name\": \"Eric\",\n    \"gender\": \"male\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -188,35 +188,25 @@
 			]
 		},
 		{
-			"name": "其他",
+			"name": "會員按讚追蹤動態",
 			"item": [
 				{
-					"name": "上傳圖片",
+					"name": "追蹤朋友",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTIxZDIyZDk0NGZmMzJjYzY0MDU5ZiIsImlhdCI6MTcxNjcxMTkyOSwiZXhwIjoxNzE3MzE2NzI5fQ.E8iKTxe6F2D-gm85BYhXpyyMwSiCSi6tm6OIdMaNUyQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/Users/trapasecurity/Desktop/5bJiN0A.png"
-								}
-							]
-						},
 						"url": {
-							"raw": "https://metawall-backend-j6d4.onrender.com/api/upload",
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/6662bb9ca1bde7d67cea94c9/follow",
 							"protocol": "https",
 							"host": [
 								"metawall-backend-j6d4",
@@ -225,7 +215,106 @@
 							],
 							"path": [
 								"api",
-								"upload"
+								"users",
+								"6662bb9ca1bde7d67cea94c9",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消追蹤朋友",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/6662bb9ca1bde7d67cea94c9/follow",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"6662bb9ca1bde7d67cea94c9",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人按讚列表",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/liked_posts",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"liked_posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人追蹤名單",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/users/followings",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"followings"
 							]
 						}
 					},
@@ -244,7 +333,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTIxZDIyZDk0NGZmMzJjYzY0MDU5ZiIsImlhdCI6MTcxNjcxMTkyOSwiZXhwIjoxNzE3MzE2NzI5fQ.E8iKTxe6F2D-gm85BYhXpyyMwSiCSi6tm6OIdMaNUyQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
 									"type": "string"
 								}
 							]
@@ -280,6 +369,50 @@
 					"response": []
 				},
 				{
+					"name": "取得單一貼文",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66703211107698bc9c4af606",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"66703211107698bc9c4af606"
+							],
+							"query": [
+								{
+									"key": "timeSort",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "test",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "新增貼文",
 					"request": {
 						"auth": {
@@ -287,7 +420,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTIxZDIyZDk0NGZmMzJjYzY0MDU5ZiIsImlhdCI6MTcxNjcxMTkyOSwiZXhwIjoxNzE3MzE2NzI5fQ.E8iKTxe6F2D-gm85BYhXpyyMwSiCSi6tm6OIdMaNUyQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
 									"type": "string"
 								}
 							]
@@ -296,7 +429,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"663f77b111456536a3eb5515\",\n    \"content\": \"at nibh in hac habitasse platea dictumst aliquam augue quam sollicitud…\"\n}",
+							"raw": "{\n    \"user\": \"66704153420f6d52ca2357ff\",\n    \"content\": \"at nibh in hac habitasse platea dictumst aliquam augue quam sollicitud…\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -320,21 +453,22 @@
 					"response": []
 				},
 				{
-					"name": "編輯貼文",
+					"name": "新增一則貼文的讚",
 					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n   \"name\": \"edit post\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
 								}
-							}
+							]
 						},
+						"method": "POST",
+						"header": [],
 						"url": {
-							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66239d402710f2394120a34b",
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66704221420f6d52ca23581b/like",
 							"protocol": "https",
 							"host": [
 								"metawall-backend-j6d4",
@@ -344,7 +478,244 @@
 							"path": [
 								"api",
 								"post",
-								"66239d402710f2394120a34b"
+								"66704221420f6d52ca23581b",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消一則貼文的讚",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66704221420f6d52ca23581b/like",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"66704221420f6d52ca23581b",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文的留言",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"this is a comment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66704221420f6d52ca23581b/comment",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"66704221420f6d52ca23581b",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "編輯一則貼文的留言",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"this is a edit comment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/comment/667042a5420f6d52ca23583a",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"comment",
+								"667042a5420f6d52ca23583a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除一則貼文的留言",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/comment/667042a5420f6d52ca23583a",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"comment",
+								"667042a5420f6d52ca23583a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人所有貼文列表",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/posts/user/66704153420f6d52ca2357ff",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"posts",
+								"user",
+								"66704153420f6d52ca2357ff"
+							],
+							"query": [
+								{
+									"key": "timeSort",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "test",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "編輯貼文",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"content\": \"edit edit edit...\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/66704221420f6d52ca23581b",
+							"protocol": "https",
+							"host": [
+								"metawall-backend-j6d4",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"post",
+								"66704221420f6d52ca23581b"
 							]
 						}
 					},
@@ -358,24 +729,15 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
 									"type": "string"
 								}
 							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/663f7beb11456536a3eb5516",
+							"raw": "https://metawall-backend-j6d4.onrender.com/api/post/667043c3420f6d52ca23587c",
 							"protocol": "https",
 							"host": [
 								"metawall-backend-j6d4",
@@ -385,7 +747,7 @@
 							"path": [
 								"api",
 								"post",
-								"663f7beb11456536a3eb5516"
+								"667043c3420f6d52ca23587c"
 							]
 						}
 					},
@@ -399,7 +761,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTU5MzE1OTBlZTNmZWViYmQ3NDM2OSIsImlhdCI6MTcxNjg4NDI1MywiZXhwIjoxNzE3NDg5MDUzfQ.J9cFAhlXdf7qh-POcOl8gg8bV5ON_TeIsBPhq944-Fg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NWViZDA3M2RiM2NjY2UyYzEzMGY5MSIsImlhdCI6MTcxNzQ4NTUyMCwiZXhwIjoxNzE4MDkwMzIwfQ.wlqC2aPaE1KO9o2uqx-W2_PD8e6tcZDWmZ08XFSlg4k",
 									"type": "string"
 								}
 							]
@@ -426,6 +788,51 @@
 							"path": [
 								"api",
 								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "其他",
+			"item": [
+				{
+					"name": "上傳圖片",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzA0MTUzNDIwZjZkNTJjYTIzNTdmZiIsImlhdCI6MTcxODYzMjgwMSwiZXhwIjoxNzE5MjM3NjAxfQ.T2PH264CzdydkyCGw0tL1nSda4Kw313R8X79qq77hqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/trapasecurity/Desktop/cool.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"upload"
 							]
 						}
 					},
